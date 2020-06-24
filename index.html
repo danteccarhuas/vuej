@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    // at end of body tag
+<script
+  src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js">
+</script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js">
+</script>
+</head>
+<body>
+    <section id="app" class="section">
+        <form >
+          <h1 class="title is-1">
+            {{form.formName}}
+          </h1>
+      
+          <div class="field">
+            <label class="label">Descripcion</label>
+            <div class="control">
+              <input class="input" type="text" v-model="form.userName" />
+            </div>
+          </div>
+      
+          <div class="field">
+            <label class="label">Precion</label>
+            <div class="control">
+              <div class="select">
+                <select v-model="form.favoriteColor">
+                  <option v-for="color in ['Red', 'Blue', 'Green']" :value="color">
+                    {{color}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+      
+          <div class="field">
+            <label class="label">Cantidad</label>
+            <div class="control">
+              <label>
+                <input type="radio" value="whataburger" v-model="form.favoriteHamburger" />
+                Whataburger
+              </label>
+              <br>
+              <label>
+                <input type="radio" value="pterrys" v-model="form.favoriteHamburger" />
+                P.Terry's
+              </label>
+              <br>
+              <label>
+                <input type="radio" value="hopdoddy" v-model="form.favoriteHamburger" />
+                Hopdoddy
+              </label>
+            </div>
+          </div>
+      
+          <input class="button is-primary margin-bottom" type="submit" @click.prevent="fakeSubmit" />
+      
+        </form>
+        
+        <transition name="fade" mode="out-in">
+          <article class="message is-primary" v-show="showSubmitFeedback">
+            <div class="message-header">
+              <p>Fake Send Status:</p>
+            </div>
+            <div class="message-body">
+              Successfully Submitted!
+            </div>
+          </article>
+        </transition>
+        
+        <hr>
+        
+        <h5>
+          JSON
+        </h5>
+        <pre><code>{{form}}</code></pre>
+      </section>
+
+      <script>
+        new Vue({
+        el: '#app',
+        data: {
+            form: {
+            formName: 'Articulo',
+            descripcion: '',
+            precio: 'Red',
+            cantidad: ''
+            },
+            showSubmitFeedback: false
+        },
+        methods: {
+            fakeSubmit(){
+            this.showSubmitFeedback = true;
+            setTimeout(() => {
+                this.showSubmitFeedback = false;
+            }, 3000);
+            }
+        }
+        });
+
+      </script>
+</body>
+</html>
